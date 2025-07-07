@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-east4-docker.pkg.dev/qwiklabs-gcp-02-b80793924be9/gke-rollback-task/rolling-update-demo:$SHORT_SHA', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-east4-docker.pkg.dev/qwiklabs-gcp-02-b80793924be9/gke-rollback-task/rolling-update-demo:$SHORT_SHA']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - 'set'
+  - 'image'
+  - 'deployment/rolling-update-demo'
+  - 'rolling-update-demo=us-east4-docker.pkg.dev/qwiklabs-gcp-02-b80793924be9/gke-rollback-task/rolling-update-demo:$SHORT_SHA'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-east4'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
+
+images:
+- 'REGION-docker.pkg.dev/qwiklabs-gcp-02-b80793924be9/gke-rollback-task/rolling-update-demo:$SHORT_SHA'
