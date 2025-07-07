@@ -14,7 +14,7 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
 images:
-- 'REGION-docker.pkg.dev/qwiklabs-gcp-02-b80793924be9/gke-rollback-task/rolling-update-demo:$SHORT_SHA'
+- 'us-east4-docker.pkg.dev/qwiklabs-gcp-02-b80793924be9/gke-rollback-task/rolling-update-demo:$SHORT_SHA'
 
 options:
   logging: CLOUD_LOGGING_ONLY
